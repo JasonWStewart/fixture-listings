@@ -7,7 +7,7 @@
       Non-League Fixtures</span>
     </h1>
     <p class="text-xl text-gray-100 font-bold my-4">
-      Listings for upcoming fixtures in the NLS and more!
+      Listings for upcoming fixtures in the NLS and more
     </p>
     <div>
       {{-- <a href="register.html"
