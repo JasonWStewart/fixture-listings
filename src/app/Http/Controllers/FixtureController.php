@@ -10,7 +10,7 @@ class FixtureController extends Controller {
 
   public function index() {
     return view('fixtures.index', [
-      'fixtures' => Fixture::orderBy('fixture_date', 'DESC')->filter(request(['tag', 'search']))->paginate(12)
+      'fixtures' => Fixture::orderBy('fixture_date', 'DESC')->filter(request(['tag', 'search']))->paginate(12)->withQueryString()
     ]);
   }
 

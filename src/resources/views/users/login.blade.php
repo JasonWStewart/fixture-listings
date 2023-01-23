@@ -34,12 +34,12 @@
         </button>
       </div>
 
-      <div class="mt-8">
+      {{-- <div class="mt-8">
         <p>
           Don't have an account?
           <a href="/register" class="text-themeCol">Register</a>
         </p>
-      </div>
+      </div> --}}
     </form>
   </x-card>
 </x-layout>
