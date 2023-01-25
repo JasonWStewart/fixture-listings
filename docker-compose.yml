@@ -1,12 +1,12 @@
 version: "3"
 
 networks:
-  laravel:
+  npm-proxy:
+    external: true
 
 services:
   nginx:
     image: nginx:stable-alpine
-    container_name: nginx
     ports:
       - "8080:80"
     volumes:
@@ -15,17 +15,15 @@ services:
     depends_on:
       - php
       - mysql
-
     networks:
-      - laravel
+      - npm-proxy
 
   mysql:
     image: mariadb:latest
-    container_name: mysql
     restart: unless-stopped
     tty: true
     ports:
-      - "4306:3306"
+      - "3306:3306"
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
@@ -36,44 +34,40 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
-      - laravel
+      - npm-proxy
 
   php:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: php
     volumes:
       - ./src:/var/www/html
     ports:
       - "9000:9000"
     networks:
-      - laravel
+      - npm-proxy
 
   composer:
     image: composer:latest
-    container_name: composer
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
     networks:
-      - laravel
+      - npm-proxy
 
   npm:
     image: node:lts-hydrogen
-    container_name: npm
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
     entrypoint: ["npm"]
     networks:
-      - laravel
+      - npm-proxy
 
   artisan:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: artisan
     volumes:
       - ./src:/var/www/html
     depends_on:
@@ -81,12 +75,11 @@ services:
     working_dir: /var/www/html
     entrypoint: ["/var/www/html/artisan"]
     networks:
-      - laravel
+      - npm-proxy
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: unless-stopped
-    container_name: phpmyadmin
     depends_on:
       - mysql
     ports:
@@ -95,4 +88,4 @@ services:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     networks:
-      - laravel
+      - npm-proxy
