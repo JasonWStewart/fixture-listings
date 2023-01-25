@@ -2,8 +2,8 @@
   @include('partials._search')
   <a href="/" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> Back
   </a>
-  <div class="mx-4">
-    <x-card class="p-10">
+  <div class="mx-auto max-w-sm lg:max-w-xl px-3">
+    <x-card class="p-10 bg-white">
       <div class="flex flex-col items-center justify-center text-center">
         <img class="w-48 mr-6 mb-6"
           src="{{ $fixture->fixture_image ? asset('storage/' . $fixture->fixture_image) : asset('images/no-image.png') }}"
@@ -22,28 +22,21 @@
           </h3>
           <div class="text-lg space-y-6">
             {{ $fixture->description }}
-
-            {{-- <a href="mailto:test@test.com" class="block bg-themeCol text-white mt-6 py-2 rounded-xl hover:opacity-80"><i
-                  class="fa-solid fa-envelope"></i>
-                Contact Employer</a>
-
-              <a href="https://test.com" target="_blank"
-                class="block bg-black text-white py-2 rounded-xl hover:opacity-80"><i class="fa-solid fa-globe"></i> Visit
-                Website</a> --}}
           </div>
         </div>
       </div>
     </x-card>
-    <x-card class="mt-4 p-2 flex space-x-6">
-      <a href="/fixtures/{{ $fixture->id }}/edit">
-        <i class="fa-solid fa-pencil"></i> Edit Fixture
-      </a>
-      <form method="POST" action="/fixtures/{{ $fixture->id }}">
-        @csrf
-        @method('DELETE')
-        <button class="text-red-500"><i class="fa-solid fa-trash"></i> Delete Fixture</button>
-
-      </form>
-    </x-card>
+    @auth
+      <x-card class="mt-4 p-2 flex space-x-6">
+        <a href="/fixtures/{{ $fixture->id }}/edit">
+          <i class="fa-solid fa-pencil"></i> Edit Fixture
+        </a>
+        <form method="POST" action="/fixtures/{{ $fixture->id }}">
+          @csrf
+          @method('DELETE')
+          <button class="text-red-500"><i class="fa-solid fa-trash"></i> Delete Fixture</button>
+        </form>
+      </x-card>
+    @endauth
   </div>
 </x-layout>

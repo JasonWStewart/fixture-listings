@@ -1,10 +1,10 @@
 <x-layout>
   @include('partials._hero')
   @include('partials._search')
-  <div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4">
+  <div class="md:grid 2xl:grid-cols-3 grid-cols-2 gap-6 space-y-6 md:space-y-0 mx-6 px-6 py-6">
     @unless(count($fixtures) == 0)
       @foreach ($fixtures as $fixture)
-        <x-fixture-card :fixture="$fixture" />
+        <x-fixture-card :fixture="$fixture" class="drop-shadow-lg hover:drop-shadow-xl" />
       @endforeach
     @else
       <p>No fixtures found.</p>

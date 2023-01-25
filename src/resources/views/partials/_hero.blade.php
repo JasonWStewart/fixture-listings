@@ -3,10 +3,10 @@
     style="background-image: url('images/football-field.png')"></div>
 
   <div class="z-10">
-    <h1 class="text-5xl font-bold uppercase text-white">
+    <h1 class="sm:text-5xl text-3xl font-bold uppercase text-white">
       Non-League Fixtures</span>
     </h1>
-    <p class="text-xl text-gray-100 font-bold my-4">
+    <p class="sm:text-xl text-md text-gray-100 font-bold my-4 mx-6">
       Listings for upcoming fixtures in the NLS and more
     </p>
     <div>
