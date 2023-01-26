@@ -23,7 +23,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - 127.0.0.1:3306:3306
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
@@ -42,6 +42,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./src:/var/www/html
+    ports:
+      - 127.0.0.1:9000:9000
     networks:
       - npm-proxy
 
